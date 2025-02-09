@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:motorent/presentation/pages/onboarding_page.dart';
 
 void main() {
@@ -14,7 +15,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+        colorScheme: ColorScheme.light(
+          primary: Colors.blue,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+        ),
+        textTheme: GoogleFonts.kanitTextTheme(),
       ),
       title: 'MotoRent',
       home: OnboardingPage(),
