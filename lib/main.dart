@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.kanitTextTheme(),
       ),
       title: 'MotoRent',
-      home: OnboardingPage(),
+      home: const OnboardingPage(),
     );
   }
 }

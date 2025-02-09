@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motorent/data/models/car.dart';
+import 'package:motorent/presentation/pages/maps_details_page.dart';
 import 'package:motorent/presentation/widgets/car_card.dart';
 import 'package:motorent/presentation/widgets/more_card.dart';
 
@@ -83,22 +84,32 @@ class CarDetailsPage extends StatelessWidget {
                 ),
                 SizedBox(width: 20),
                 Expanded(
-                  child: Container(
-                    height: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/maps.png'),
-                        fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MapsDetailsPage(car: car),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/maps.png'),
+                          fit: BoxFit.cover,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            spreadRadius: 5,
+                            blurRadius: 15,
+                            offset: Offset(0, 5),
+                          )
+                        ],
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          spreadRadius: 5,
-                          blurRadius: 15,
-                          offset: Offset(0, 5),
-                        )
-                      ],
                     ),
                   ),
                 ),
