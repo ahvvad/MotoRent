@@ -30,5 +30,4 @@ class MyApp extends StatelessWidget {
 }
 
 
-// ToDo: animate the  maps
-// ToDo: add a Clean-Arc & BLoC pattern and Firebase database implementation
+// ToDo:  BLoC pattern 
