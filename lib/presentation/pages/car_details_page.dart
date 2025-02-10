@@ -3,6 +3,7 @@ import 'package:motorent/data/models/car.dart';
 import 'package:motorent/presentation/pages/maps_details_page.dart';
 import 'package:motorent/presentation/widgets/car_card.dart';
 import 'package:motorent/presentation/widgets/more_cars.dart';
+import 'package:motorent/presentation/widgets/toast_helper.dart';
 
 class CarDetailsPage extends StatelessWidget {
   const CarDetailsPage({super.key, required this.car});
@@ -29,7 +30,10 @@ class CarDetailsPage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // ToDo: Add Toast
+                ToastHelper.showTopNotification(
+                  context,
+                  "This feature is under development!",
+                );
               },
               child: SizedBox(
                 child: Row(
@@ -64,22 +68,27 @@ class CarDetailsPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 38),
-                    decoration: BoxDecoration(
-                      color: Color(0xffF3F3F3),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        // ToDo: Add Toast
-                      },
+                  child: GestureDetector(
+                    onTap: () {
+                      ToastHelper.showTopNotification(
+                        context,
+                        "Profile page is under development!",
+                      );
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 38),
+                      decoration: BoxDecoration(
+                        color: Color(0xffF3F3F3),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                       child: SizedBox(
                         child: Column(
                           children: [
                             CircleAvatar(
                               radius: 40,
-                              backgroundImage: AssetImage('assets/images/user.png'),
+                              backgroundImage:
+                                  AssetImage('assets/images/user.png'),
                               backgroundColor: Colors.grey,
                             ),
                             SizedBox(height: 10),

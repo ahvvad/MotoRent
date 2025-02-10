@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:motorent/data/models/car.dart';
+import 'package:motorent/presentation/widgets/toast_helper.dart';
 
 class MapsDetailsPage extends StatelessWidget {
   const MapsDetailsPage({super.key, required this.car});
@@ -27,7 +28,10 @@ class MapsDetailsPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // ToDo: Add Toast message
+              ToastHelper.showTopNotification(
+                context,
+                "This feature is under development!",
+              );
             },
             icon: Icon(
               CupertinoIcons.slider_horizontal_3,
@@ -98,18 +102,26 @@ class CarDetailsCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Color(0xff45454B),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Icon(
-                      Icons.clear_rounded,
-                      color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    ToastHelper.showTopNotification(
+                      context,
+                      "Not Now :)",
+                    );
+                  },
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Color(0xff45454B),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Icon(
+                        Icons.clear_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -207,7 +219,10 @@ class CarDetailsCard extends StatelessWidget {
                       SizedBox(
                         child: ElevatedButton(
                           onPressed: () {
-                            // ToDo: Add Toast message
+                            ToastHelper.showTopNotification(
+                              context,
+                              "Booking is under development!",
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
