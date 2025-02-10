@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:motorent/data/models/car.dart';
 import 'package:motorent/presentation/pages/car_details_page.dart';
 
@@ -12,8 +13,21 @@ class CarCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => CarDetailsPage(car: car),
+          PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 500),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                CarDetailsPage(car: car),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              var tween = Tween(begin: Offset(1.0, 0.0), end: Offset.zero)
+                  .chain(CurveTween(curve: Curves.easeInOut));
+              var offsetAnimation = animation.drive(tween);
+
+              return SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              );
+            },
           ),
         );
       },
@@ -22,27 +36,34 @@ class CarCard extends StatelessWidget {
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Color(0xffF3F3F3),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 5),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(25),
         ),
         child: Column(
           children: [
-            Image.asset(height: 120, 'assets/images/car_image.png'),
-            Text(
-              car.model,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'NEAREST CARS',
+                style: TextStyle(
+                  letterSpacing: 2.5,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w200,
+                  color: Colors.grey[600],
+                ),
               ),
             ),
-            SizedBox(height: 10),
+            Image.asset(height: 120, 'assets/images/car_image.png'),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                car.model,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            // SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,15 +71,15 @@ class CarCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Image.asset('assets/images/gps.png'),
+                        SvgPicture.asset('assets/images/gps.svg'),
                         SizedBox(width: 2),
-                        Text('${car.distance.toStringAsFixed(0)}Km')
+                        Text('${car.distance.toStringAsFixed(0)}km')
                       ],
                     ),
                     SizedBox(width: 20),
                     Row(
                       children: [
-                        Image.asset('assets/images/pump.png'),
+                        SvgPicture.asset('assets/images/pump.svg'),
                         SizedBox(width: 2),
                         Text('${car.fuelCapacity.toStringAsFixed(0)}L')
                       ],
@@ -67,7 +88,10 @@ class CarCard extends StatelessWidget {
                 ),
                 Text(
                   '\$${car.pricePerHour.toStringAsFixed(2)}/h',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

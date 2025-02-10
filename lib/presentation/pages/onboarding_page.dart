@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:motorent/presentation/pages/car_list_screen.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -32,28 +33,47 @@ class OnboardingPage extends StatelessWidget {
                       'Premium cars, \nEnjoy the luxury',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: GoogleFonts.kanit().fontFamily,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Text(
                       'Premium and prestige cars daily rental. \nExperience the thrill at a lower price',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 16,
+                        fontSize: 18,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 40),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => CarListScreen()),
-                              (route) => false);
+                            PageRouteBuilder(
+                              transitionDuration: Duration(milliseconds: 500),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      CarListScreen(),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                var tween = Tween(
+                                        begin: Offset(1.0, 0.0),
+                                        end: Offset.zero)
+                                    .chain(CurveTween(curve: Curves.easeInOut));
+                                var offsetAnimation = animation.drive(tween);
+
+                                return SlideTransition(
+                                  position: offsetAnimation,
+                                  child: child,
+                                );
+                              },
+                            ),
+                            (route) => false,
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black,
@@ -62,12 +82,13 @@ class OnboardingPage extends StatelessWidget {
                         child: Text(
                           'Let\'s Go',
                           style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 40),
                   ],
                 ),
               ),

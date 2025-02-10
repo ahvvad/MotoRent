@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
         ),
-        textTheme: GoogleFonts.kanitTextTheme(),
+        textTheme: GoogleFonts.barlowTextTheme(),
       ),
       title: 'MotoRent',
       home: const OnboardingPage(),
@@ -30,9 +30,5 @@ class MyApp extends StatelessWidget {
 }
 
 
-// ToDo: change the UI of the app
-// ToDo: change the font to => GoogleFonts.barlowTextTheme(),
-// ToDo: change the images to Awesome icons [ location-arrow / gas-pump / battery-three-quarters / arrow-back of the maps pages ]
-// ToDo: refactor the code
 // ToDo: animate the  maps
 // ToDo: add a Clean-Arc & BLoC pattern and Firebase database implementation

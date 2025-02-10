@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:motorent/data/models/car.dart';
 
@@ -19,7 +20,8 @@ class MapsDetailsPage extends StatelessWidget {
             Navigator.pop(context);
           },
           icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
+            Icons.arrow_back_rounded,
+            size: 30,
           ),
         ),
         actions: [
@@ -29,6 +31,7 @@ class MapsDetailsPage extends StatelessWidget {
             },
             icon: Icon(
               CupertinoIcons.slider_horizontal_3,
+              size: 30,
             ),
           ),
         ],
@@ -71,14 +74,14 @@ class CarDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 370,
       child: Stack(
         children: [
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.black54,
+              color: Color(0xff282931),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -95,7 +98,21 @@ class CarDetailsCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Color(0xff45454B),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Icon(
+                      Icons.clear_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                 Text(
                   car.model,
                   style: TextStyle(
@@ -107,22 +124,17 @@ class CarDetailsCard extends StatelessWidget {
                 SizedBox(height: 10),
                 Row(
                   children: [
-                    Icon(
-                      Icons.directions_car_filled_rounded,
-                      color: Colors.white,
-                      size: 16,
-                    ),
+                    SvgPicture.asset('assets/images/gps.svg'),
                     SizedBox(width: 5),
                     Text(
-                      '> ${car.distance}Km',
+                      '> ${car.distance}km',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                       ),
                     ),
                     SizedBox(width: 10),
-                    Icon(Icons.battery_full_rounded,
-                        color: Colors.white, size: 16),
+                    SvgPicture.asset('assets/images/pump.svg'),
                     SizedBox(width: 5),
                     Text(
                       '> ${car.fuelCapacity}L',
@@ -173,26 +185,40 @@ class CarDetailsCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '\$${car.pricePerHour * 24}/day',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '\$${car.pricePerHour * 24}',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '/day',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // ToDo: Add Toast message
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.black,
-                        ),
-                        child: Text(
-                          'Book Now',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                      SizedBox(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // ToDo: Add Toast message
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.black,
+                          ),
+                          child: Text(
+                            'Book Now',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -203,9 +229,13 @@ class CarDetailsCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 50,
-            right: 20,
-            child: Image.asset('assets/images/white_car.png'),
+            top: 52,
+            right: 10,
+            child: Image.asset(
+              'assets/images/white_car.png',
+              // width: 100,
+              height: 130,
+            ),
           ),
         ],
       ),
@@ -214,31 +244,39 @@ class CarDetailsCard extends StatelessWidget {
 }
 
 Widget featureIcons() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      featureIcon(Icons.local_gas_station, 'Diesel', 'Common Rail'),
-      featureIcon(Icons.speed, 'Acceleration', '0 - 100km/s'),
-      featureIcon(Icons.ac_unit, 'Cold', 'Temp Control'),
-    ],
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        featureIcon(
+            Icons.local_gas_station, 'Diesel', 'Common Rail Fuel Injection'),
+        SizedBox(width: 20),
+        featureIcon(Icons.speed, 'Acceleration', '0 - 100km/ 11s'),
+        SizedBox(width: 20),
+        featureIcon(Icons.ac_unit, 'Cool Seat', 'Temp Control on seat'),
+      ],
+    ),
   );
 }
 
 Widget featureIcon(IconData icon, String title, String subtitle) {
   return Container(
-    width: 100,
+    width: 150,
     height: 100,
-    padding: EdgeInsets.all(5),
+    padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey, width: 1)),
+        border: Border.all(color: Colors.grey.shade300, width: 1)),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: 28,
+          size: 42,
         ),
-        Text(title),
+        Text(title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
         Text(
           subtitle,
           style: TextStyle(color: Colors.grey, fontSize: 10),

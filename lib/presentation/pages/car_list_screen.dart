@@ -35,18 +35,13 @@ class CarListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         title: Text(
           'Choose Your Car',
           style: TextStyle(
             fontWeight: FontWeight.w600,
           ),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
