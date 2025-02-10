@@ -28,6 +28,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-// ToDo:  BLoC pattern 
