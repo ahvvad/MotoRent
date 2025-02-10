@@ -6,10 +6,11 @@ import 'package:motorent/injection_container.dart';
 import 'package:motorent/presentation/bloc/car_bloc.dart';
 import 'package:motorent/presentation/pages/onboarding_page.dart';
 
-void main() async{
-  initInjection();
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  initInjection();
+
   runApp(const MyApp());
 }
 
@@ -24,12 +25,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.light(
-            primary: Colors.blue,
-          ),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.white,
-          ),
+          colorScheme: const ColorScheme.light(primary: Colors.blue),
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
           textTheme: GoogleFonts.barlowTextTheme(),
         ),
         title: 'MotoRent',

@@ -1,37 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:motorent/data/models/car.dart';
 import 'package:motorent/presentation/bloc/car_bloc.dart';
 import 'package:motorent/presentation/widgets/car_card.dart';
 
 class CarListScreen extends StatelessWidget {
-  CarListScreen({super.key});
-  final List<Car> cars = [
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    ),
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    ),
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    ),
-    Car(
-      model: 'Fortuner GR',
-      distance: 870,
-      fuelCapacity: 50,
-      pricePerHour: 45,
-    )
-  ];
+  const CarListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +12,9 @@ class CarListScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Choose Your Car',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -52,20 +23,18 @@ class CarListScreen extends StatelessWidget {
       body: BlocBuilder<CarBloc, CarState>(
         builder: (context, state) {
           if (state is CarsLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is CarsLoaded) {
             return ListView.builder(
               itemCount: state.cars.length,
               itemBuilder: (context, index) {
-                return CarCard(
-                  car: cars[index],
-                );
+                return CarCard(car: state.cars[index]);
               },
             );
           } else if (state is CarsError) {
-            return Center(child: Text('error: $state.message'));
+            return Center(child: Text('Error: ${state.message}'));
           } else {
-            return Container();
+            return const Center(child: Text('No cars available'));
           }
         },
       ),

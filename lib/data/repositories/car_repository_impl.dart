@@ -8,7 +8,8 @@ class CarRepositoryImpl implements CarRepository {
   CarRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<Car>> fetchCars() {
+  Future<List<Car>> fetchCars() async {
+    print('Fetching cars from Firestore...');
     return dataSource.getCars();
   }
 }
