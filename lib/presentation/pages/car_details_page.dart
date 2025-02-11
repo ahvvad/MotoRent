@@ -211,7 +211,7 @@ class _CarDetailsPageState extends State<CarDetailsPage>
                   const SizedBox(height: 5),
                   MoreCard(
                     car: Car(
-                      model: '${widget.car.model}+1',
+                      model: '${widget.car.model} +1',
                       distance: widget.car.distance + 100,
                       fuelCapacity: widget.car.fuelCapacity + 100,
                       pricePerHour: widget.car.pricePerHour + 10,
@@ -226,7 +226,7 @@ class _CarDetailsPageState extends State<CarDetailsPage>
                   ),
                   MoreCard(
                     car: Car(
-                      model: '${widget.car.model}-2',
+                      model: '${widget.car.model} -2',
                       distance: widget.car.distance + 200,
                       fuelCapacity: widget.car.fuelCapacity + 200,
                       pricePerHour: widget.car.pricePerHour + 20,
@@ -241,7 +241,7 @@ class _CarDetailsPageState extends State<CarDetailsPage>
                   ),
                   MoreCard(
                     car: Car(
-                      model: '${widget.car.model}-3',
+                      model: '${widget.car.model} -3',
                       distance: widget.car.distance + 300,
                       fuelCapacity: widget.car.fuelCapacity + 300,
                       pricePerHour: widget.car.pricePerHour + 30,
